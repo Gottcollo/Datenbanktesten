@@ -12,15 +12,11 @@ cursor = conn.cursor()
 
 
 
-sql = """ 
-INSERT INTO konzerte VALUE (
-    '2017-11-11',
-    'Israel',
-    'Haifa'
-    )
-
+insert_sql = """
+INSERT INTO konzerte (datum, land, stadt)
+VALUES (?, ?, ?)
 """
-cursor.execute(sql)
+cursor.execute(insert_sql, ('2017-11-11', 'Israel', 'Haifa'))
 
 cursor.execute('SELECT name FROM sys.databases')
 for db in cursor:
