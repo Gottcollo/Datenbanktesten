@@ -13,19 +13,16 @@ conn.autocommit = True  # Autocommit aktivieren
 cursor = conn.cursor()
 
 def insert_concert_from_user_input():
-
-    datum = input("Datum: ")
+    datum = input("Datum (YYYY-MM-DD): ")
     land = input("Land: ")
     stadt = input("Stadt: ")
 
-    val = f'"{datum}", "{land}", "{stadt}"'
-    sql = f'INSERT INTO konzerte VALUES ({val})'
+    sql = 'INSERT INTO konzerte (datum, land, stadt) VALUES (?, ?, ?)'
+    cursor.execute(sql, (datum, land, stadt))
+    print("Eintrag erfolgreich hinzugefügt.")
 
-
-
-# INSERT-Anweisung korrekt formulieren
-
-    cursor.execute(sql)
+# Funktion aufrufen
+insert_concert_from_user_input()
 
 # Testabfrage: Vorhandene Datenbanken anzeigen
 cursor.execute('SELECT name FROM sys.databases')
